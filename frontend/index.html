@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>UCP Register</title>
+
+<style>
+body {
+  background:#0f172a;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  font-family:Arial;
+}
+.box {
+  background:#1e293b;
+  padding:25px;
+  width:300px;
+  border-radius:10px;
+  color:white;
+}
+input, button {
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  border:none;
+  border-radius:5px;
+}
+button {
+  background:#22c55e;
+  font-weight:bold;
+}
+#msg {
+  margin-top:10px;
+  text-align:center;
+}
+</style>
+
+</head>
+<body>
+
+<div class="box">
+  <h2>UCP GTA SAMP</h2>
+  <input id="ucp" placeholder="First_Last">
+  <button onclick="daftar()">BUAT UCP</button>
+  <div id="msg"></div>
+</div>
+
+<script>
+function daftar() {
+  fetch("http://localhost:3000/ucp", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ ucp: ucp.value })
+  })
+  .then(res => res.json())
+  .then(data => {
+    msg.innerText = data.msg;
+    msg.style.color = data.success ? "#22c55e" : "#ef4444";
+  });
+}
+</script>
+
+</body>
+</html>
